@@ -3,8 +3,7 @@
         "disableCommand": "This command has been temporarily disabled.",
         "guildOnly": "The command cannot be used outside of guilds!",
         "dmOnly": "The command cannot be used outside of DMs!",
-        "developersOnly": "This command is only accessible to bot developers!",
-        "needPermissions": "I need `{permission}` permission{plural} for this command",
+        "needPermissions": "I need `{permission}` permission for this command",
         "cooldown": "Please wait `{timeLeft}` before reusing the `{commandName}` command.",
         "unexpectedError": "There was an unexpected error trying to execute that command!"
     },
@@ -14,7 +13,7 @@
 
         "waitForTurn": "Please wait for your turn",
 
-        "chooseMove": "<@{user}>, choose your move:",
+        "chooseMove": "<@{user}>, choose a position to place `{sign}`:",
 
         "matchWon": "{user} has won the game!",
         "matchTie": "The match has ended in a tie!"

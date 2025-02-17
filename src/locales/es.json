@@ -1,1 +1,22 @@
-{}
+{
+    "command_handler": {
+        "disableCommand": "Este comando ha sido deshabilitado temporalmente.",
+        "guildOnly": "¡El comando no se puede usar fuera de las guilds!",
+        "dmOnly": "¡El comando no se puede usar fuera de los mensajes directos!",
+        "needPermissions": "Necesito el permiso `{permission}` para este comando.",
+        "cooldown": "Por favor, espera `{timeLeft}` antes de reutilizar el comando `{commandName}`.",
+        "unexpectedError": "¡Hubo un error inesperado al intentar ejecutar ese comando!"
+    },
+    "command_tictactoe": {
+        "opponentIsBot": "El oponente no puede ser un bot.",
+        "opponentIsSelf": "No puedes jugar contra ti mismo.",
+        "waitForTurn": "Por favor, espera tu turno.",
+        "chooseMove": "<@{user}>, elige una posición para colocar `{sign}`:",
+        "matchWon": "{user} ha ganado el juego.",
+        "matchTie": "¡El juego ha terminado en empate!"
+    },
+    "command_avatar": {
+        "defaultAvatar": "Este usuario tiene un avatar predeterminado.",
+        "targetAvatar": "Avatar de {tag}"
+    }
+}

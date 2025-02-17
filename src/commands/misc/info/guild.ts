@@ -6,6 +6,8 @@ import {
 } from "discord.js";
 import moment from "moment";
 
+import { trimArray } from "../../../utils/formatter";
+
 const verificationLevels = {
     0: 'None',
     1: 'Low',
@@ -17,15 +19,6 @@ const filterLevels = {
     0: 'Off',
     1: 'No Role',
     2: 'Everyone'
-};
-
-function trimArray(arr: Array<string>, maxLen = 10) {
-    if (arr.length > maxLen) {
-        const len = arr.length - maxLen;
-        arr = arr.slice(0, maxLen);
-        arr.push(`${len} more...`);
-    };
-    return arr;
 };
 
 export async function Guild(interaction: CommandInteraction) {

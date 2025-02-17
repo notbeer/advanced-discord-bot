@@ -28,7 +28,6 @@ export const command: Command = {
         const avatarEmbed = new EmbedBuilder()
             .setColor("#2F3136")
             .setAuthor({ name: cli.username, iconURL: cli.displayAvatarURL({ forceStatic: false }) })
-            .setColor("#2F3136")
             .setThumbnail(cli.displayAvatarURL({ forceStatic: false }))
             .addFields(
                 { name: '**Uptime: **', value: MS(uptime, { fullDuration: true, avoidDuration: ['ms'] }), inline: true },

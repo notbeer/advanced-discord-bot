@@ -10,7 +10,6 @@ import MS from "../lib/ms";
 
 import i18n from "../utils/i18n";
 
-import { developerID } from '../../config.json';
 import { log } from '../utils/log';
 
 export async function command(client: ClientExtention, interaction: ChatInputCommandInteraction) {
@@ -24,9 +23,7 @@ export async function command(client: ClientExtention, interaction: ChatInputCom
     if(command.guildOnly && interaction.channel?.type === ChannelType.DM) return interaction.reply({ content: i18n.__("command_handler.guildOnly"), ephemeral: true });
     if(command.dmOnly && interaction.channel?.type !== ChannelType.DM) return interaction.reply({ content: i18n.__("command_handler.dmOnly"), ephemeral: true });
 
-    if(command.category === "DEVELOPER" && !developerID.includes(interaction.user.id)) return interaction.reply({ content: i18n.__("command_handler.developerOnly"), ephemeral: true });
-
-    if(command.botPermissions?.length && !interaction.guild?.members?.me?.permissions.has(command.botPermissions)) return interaction.reply({ content: i18n.__mf("command_handler.needPermissions", { permission: (command.botPermissions.join('`, `') + '`').replace(/,(?!.*,)/gmi, ' and'), plural: command.botPermissions.length > 1 ? 's' : '' }), ephemeral: true });
+    if(command.botPermissions?.length && !interaction.guild?.members?.me?.permissions.has(command.botPermissions)) return interaction.reply({ content: i18n.__mf("command_handler.needPermissions", { permission: command.botPermissions.join(', ') }), ephemeral: true });
 
     if(!client.cooldowns.has(command.data.name)) client.cooldowns.set(command.data.name, new Collection());
     const now = Date.now();

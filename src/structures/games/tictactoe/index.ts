@@ -15,8 +15,6 @@ import AI from "./ai";
 
 import i18n from "../../../utils/i18n";
 
-import { sleep } from "../../../utils/promise";
-
 export const enum Difficulty {
     Easy = 0.7,
     Medium = 0.3,
@@ -82,13 +80,11 @@ export default class TicTacToe {
         ? i18n.__mf("command_tictactoe.matchWon", { user: p.username })
         : this._game.isBoardFull
             ? i18n.__("command_tictactoe.matchTie")
-            : i18n.__mf("command_tictactoe.chooseMove", { user: p.id });
+            : i18n.__mf("command_tictactoe.chooseMove", { user: p.id, sign: this._game.playerSign(this._game.currentPlayer) });
     };
 
     private async _aiMove(i: any) {
         if(!this._ai || this._game.currentPlayer !== Player.Second) return;
-
-        await sleep(500);
 
         const board = this._game.convertBoard();
         const move = Math.random() > this._difficulty! ? ai.minimax(this._game, board, this._game.p2sign).index! : ai.emptySpots(board, true);
