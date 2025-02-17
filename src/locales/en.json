@@ -1,0 +1,26 @@
+{
+    "command_handler": {
+        "disableCommand": "This command has been temporarily disabled.",
+        "guildOnly": "The command cannot be used outside of guilds!",
+        "dmOnly": "The command cannot be used outside of DMs!",
+        "developersOnly": "This command is only accessible to bot developers!",
+        "needPermissions": "I need `{permission}` permission{plural} for this command",
+        "cooldown": "Please wait `{timeLeft}` before reusing the `{commandName}` command.",
+        "unexpectedError": "There was an unexpected error trying to execute that command!"
+    },
+    "command_tictactoe": {
+        "opponentIsBot": "Opponent cannot be a bot.",
+        "opponentIsSelf": "You cannot play against yourself.",
+
+        "waitForTurn": "Please wait for your turn",
+
+        "chooseMove": "<@{user}>, choose your move:",
+
+        "matchWon": "{user} has won the game!",
+        "matchTie": "The match has ended in a tie!"
+    },
+    "command_avatar": {
+        "defaultAvatar": "This user has a default avatar.",
+        "targetAvatar": "{tag}'s Avatar"
+    }
+}
