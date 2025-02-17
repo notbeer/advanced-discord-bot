@@ -16,7 +16,7 @@ const logMessage = (level: "info" | "success" | "warn" | "error", message: any) 
         error: "❌"
     };
 
-    console.log(`${colors[level](`[${level.toUpperCase()}]`)} ${chalk.gray(getTimestamp())} ${emojis[level]} ${message ? message : 'An unknown error occured'}`);
+    console.log(`[${colors[level](`${level.toUpperCase()}`)}] ${chalk.gray(getTimestamp())} ${emojis[level]} ${message ? message : 'An unknown error occured'}`);
 };
 
 export const log = {

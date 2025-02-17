@@ -8,6 +8,7 @@ import { Command } from "@types";
 
 export const command: Command = {
     cooldown: '1 minute',
+    guildOnly: true,
     data: new SlashCommandBuilder()
         .setName('info')
         .setDescription('Get information on various items')
