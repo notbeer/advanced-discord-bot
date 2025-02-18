@@ -1,4 +1,5 @@
 import path from 'path';
+import mongoose from 'mongoose';
 import {
     Client,
     Collection
@@ -16,7 +17,13 @@ class ClientExtention extends Client {
     public async init(token: string): Promise<void> {
         await this._deployEvents();
         await this._deployCommands();
+        await this._connectToMongoose();
         this.login(token);
+    };
+    private async _connectToMongoose(): Promise<void> {
+        await mongoose.connect(process.env.MONGO_URI!)
+            .then(() => log.info('Connected to MongoDB.'))
+            .catch(err => log.error(`MongoDB connection error: ${err}`));
     };
     private async _deployEvents(): Promise<void> {
         for(const file of crawlDir(path.join(__dirname, "..", 'events'), 'ts')) {

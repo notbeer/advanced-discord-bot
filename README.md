@@ -1,13 +1,13 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/notbeer/advanced-discord-bot"><img src="images/logo.png" alt="Markdownify" width="200"></a>
+  <a href="https://github.com/notbeer/advanced-discord-bot"><img src="assets/logo.png" alt="Advanced Discord Bot" width="200"></a>
   <br>
   Advanced Discord bot
   <br>
 </h1>
 
-<h4 align="center">A Discord bot written with the help of <a href="https://discord.js.org" target="_blank">Discord.js</a>.</h4>
+<h4 align="center">A Discord bot written with the help of <a href="https://discord.js.org" target="_blank">Discord.js</a>. A well-organized and user-friendly bot designed to seamlessly integrate complex yet engaging and practical features.</h4>
 
 <p align="center">
   <img src="https://badge.fury.io/js/discord.js.svg" alt="Gitter">
@@ -20,9 +20,9 @@
   <a href="#license">License</a>
 </p>
 
----
-
-<!-- ![screenshot](https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif) -->
+<p align="center">
+  <img src="assets/showcase.gif" alt="Gitter">
+</p>
 
 ## Key Features
 
@@ -32,16 +32,23 @@
 * Commands
   - Fun
     - Games
-      - TicTacToe
+      - /tictactoe
         - Ability to play TicTacToe with a user
         - You can also play with the discord bot
   - Misc
-    - Information
+    - /info
       - Get information on the guild
-    - Avatar
+    - /avatar
       - Get a users avatar
-    - Client
+    - /client
       - Get information about the discord bot
+  - Chat Ranking
+    - /rank
+      - Get a beautiful image that displays users xp, and guild ranking.
+* Languages
+  - Ability to intregate multiple languages in the bot eg. English, Spanish, etc...
+* Chat Rank system
+  - User gets xp every 30 seconds from typing in chat. Every guild xp is seperate.
   
 
 ## How To Use
@@ -57,12 +64,6 @@ $ cd advanced-discord-bot
 
 # Install dependencies
 $ npm install
-
-# Run the app
-$ npm run start
-
-# For development purpose
-$ npm run dev
 ```
 ### Adjusting .env file
 ```ini
@@ -74,12 +75,15 @@ BOT_ID=...
 
 # Only provide a guild ID here if you only want the commands to deploy to that guild or else keep it empty
 DEVELOPMENT_GUILD_ID=...
+
+# Mongoose Database URI
+MONGO_URI=...
 ```
 
 ### Deploy or delete Slash Commands from application
 ```bash
 # Deploy Slash Commands
-$ npm run register-commands
+$ npm run deploy-commands
 
 # Delete Slash Commands
 $ npm run delete-commands

@@ -27,7 +27,10 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN!);
                 continue;
             };
             
-            command?.data && 'execute' in command ? commands.push(command.data.toJSON()) : log.warn(`[Slash Command] The command at ${file} is missing a required "data" or "execute" property.`)
+            if(command?.data && 'execute' in command) {
+                commands.push(command.data.toJSON());
+                log.success(`[Slash Command] Deploying: ${command.data.name}`);
+            } else log.warn(`[Slash Command] The command at ${file} is missing a required "data" or "execute" property.`);
         };
         await rest.put(
 			process.env.DEVELOPMENT_GUILD_ID ? 
@@ -37,7 +40,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN!);
 				body: commands
 			}
 		);
-        log.success(`[Slash Command] Successfully deployed all commands ${process.env.DEVELOPMENT_GUILD_ID ? 'in DEVELOPMENT GUILD' : 'GLOBALLY'}!`);
+        log.success(`[Slash Command] Successfully deployed the commands ${process.env.DEVELOPMENT_GUILD_ID ? 'in DEVELOPMENT GUILD' : 'GLOBALLY'}!`);
     } catch(err) {
         log.error(err);
     };
