@@ -1,6 +1,6 @@
 {
   "name": "advanced-discord-bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An advanced discord bot with a few stuff here and there",
   "main": "dist/src/index.js",
   "keywords": [

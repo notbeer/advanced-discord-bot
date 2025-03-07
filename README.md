@@ -36,12 +36,24 @@
       - /tictactoe
         - Ability to play with a user
         - You can also play with the discord bot
+      <p align="left">
+        <img src="assets/tictactoe.png" alt="Gitter">
+      </p>
+
       - Connect4
         - Ability to play with a user
         - You can also play with the discord bot
+      <p align="left">
+        <img src="assets/connect4.png" alt="Gitter">
+      </p>
+
     - Puzzles
       - /wordle
         - Remake of the popular game wordle, with a beautifully intregated canvas.
+      <p align="left">
+        <img src="assets/wordle.png" alt="Gitter">
+      </p>
+
     - Text
       - Convert a given text to emojis.
   - Misc
@@ -54,6 +66,9 @@
   - Chat Ranking
     - /rank
       - Get a beautiful image that displays users xp, and guild ranking.
+    <p align="left">
+      <img src="assets/rank-card.png" alt="Gitter">
+    </p>
   - Settings
     - /language
       - Change the discord bots language for the guild
