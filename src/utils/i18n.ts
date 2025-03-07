@@ -1,5 +1,6 @@
 import i18n from "i18n";
 import { join } from "path";
+
 import { log } from "./log";
 
 i18n.configure({

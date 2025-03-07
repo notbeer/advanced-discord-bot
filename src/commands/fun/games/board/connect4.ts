@@ -3,17 +3,18 @@ import {
     User
 } from "discord.js";
 
-import TicTacToe, { Difficulty } from "../../../structures/games/tictactoe";
+import Connect4 from "../../../../structures/games/board/connect4";
+import { Difficulty } from "../../../../structures/games/board/connect4/ai";
 
-import i18n from "../../../utils/i18n";
+import i18n from "../../../../utils/i18n";
 
 import { Command } from "@types";
 
 export const command: Command = {
     guildOnly: true,
     data: new SlashCommandBuilder()
-        .setName('tictactoe')
-        .setDescription('Play a classic game of TicTacToe')
+        .setName('connect4')
+        .setDescription('Play a classic game of Connect4')
         .addSubcommand(subcommand => subcommand
             .setName('user')
             .setDescription('Play against an user')
@@ -33,7 +34,7 @@ export const command: Command = {
                 .addChoices(
                     { name: 'Easy', value: 'e' },
                     { name: 'Medium', value: 'm' },
-                    { name: 'Impossible', value: 'i' }
+                    { name: 'Hard', value: 'h' }
                 )
             )
         ),
@@ -41,11 +42,13 @@ export const command: Command = {
         const subcommand = interaction.options.data[0];
         if(subcommand.name === 'user') {
             const opponent = subcommand.options![0].user as User;
-            if(opponent.bot) return interaction.reply({ content: i18n.__("command_tictactoe.opponentIsBot"), ephemeral: true });
-            if(opponent.id === interaction.user.id) return interaction.reply({ content: i18n.__("command_tictactoe.opponentIsSelf"), ephemeral: true });
-            new TicTacToe(interaction.user, opponent).start(interaction);
+
+            if(opponent.bot) return interaction.reply({ content: i18n.__("game.opponentIsBot"), flags: ['Ephemeral'] });
+            if(opponent.id === interaction.user.id) return interaction.reply({ content: i18n.__("game.opponentIsSelf"), flags: ['Ephemeral'] });
+            
+            new Connect4(interaction.user, opponent).start(interaction);
         } else {
-            let difficulty: Difficulty;
+            let difficulty = Difficulty.Hard;
             switch(interaction.options.get('difficulty')?.value as string) {
                 case 'e':
                     difficulty = Difficulty.Easy;
@@ -53,11 +56,8 @@ export const command: Command = {
                 case 'm':
                     difficulty = Difficulty.Medium;
                 break;
-                case 'i':
-                    difficulty = Difficulty.Impossible;
-                break;
             };
-            new TicTacToe(interaction.user, client.user!, { ai: true, difficulty: difficulty! }).start(interaction);
+            new Connect4(interaction.user, client.user!, difficulty).start(interaction);
         };
     }
 };

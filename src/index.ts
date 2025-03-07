@@ -1,22 +1,23 @@
-import dotenv from 'dotenv';
-import {
-    GatewayIntentBits,
-    Partials
-} from 'discord.js';
+import dotenv from "dotenv";
+import { ShardingManager } from "discord.js";
 
-import Client from './client';
+import { log } from "./utils/log";
 
 dotenv.config();
 
-export const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildPresences
-    ], 
-    partials: [Partials.Channel],
-    failIfNotExists: false
+const manager = new ShardingManager('src/bot.ts', {
+    execArgv: ['-r', 'ts-node/register'],
+    token: process.env.BOT_TOKEN,
+    totalShards: 'auto'
 });
 
-client.init(process.env.BOT_TOKEN!);
+
+manager.on("shardCreate", (shard) => {
+    log.info(`[Sharding] Starting #${shard.id + 1}`);
+
+    shard.on('death', () => log.warn(`[Sharding] Closing shard ${shard.id + 1}/${manager.totalShards}`));
+    shard.on('disconnect', () => log.warn(`[Sharding] ${shard.id + 1}/${manager.totalShards} has disconnected`));
+    shard.on('reconnecting', () => log.info(`[Sharding] ${shard.id + 1}/${manager.totalShards} is reconnecting`));
+});
+
+manager.spawn();

@@ -1,25 +1,32 @@
-// @ts-nocheck
 import { toMS } from './toMS';
 import { toDuration } from './toDuration';
 
-import { CompactUnitAnyCase } from '../../@types/lib/ms';
+import { Option } from '../../@types/lib/ms';
 
 function isError(error: unknown): error is Error {
     return typeof error === 'object' && error !== null && 'message' in error;
 };
 
 function MS(value: string): number;
-function MS(value: number, { compactDuration, fullDuration }?: { compactDuration?: boolean, fullDuration?: boolean }): string;
-function MS(value: number, { fullDuration, avoidDuration }?: { fullDuration: boolean, avoidDuration: Array<CompactUnitAnyCase> }): string;
-function MS(value: string | number, { compactDuration, fullDuration, avoidDuration }: { compactDuration?: boolean, fullDuration?: boolean, avoidDuration?: Array<CompactUnitAnyCase> } = {}): string | number | null {
+function MS(value: number, option?: Option): string;
+/**
+ * Format millisecond to formatted time or vise versa
+ * @param {string | number} value - Value to convert
+ * @param {Option} option - Options for the conversion
+ * @returns {string | number | null}
+ */
+function MS(value: string | number, option?: Option): string | number {
     try {
         if(typeof value === 'string') {
             if(/^\d+$/.test(value)) return Number(value);
+
             const durations = value.match(/\s*-?\s*\d*\.?\d+\s*?(years?|yrs?|weeks?|days?|hours?|hrs?|minutes?|mins?|seconds?|secs?|milliseconds?|msecs?|ms|[smhdwy])/gi);
-            return durations ? durations.reduce((a, b) => a + toMS(b), 0) : null;
+            if(durations) return durations.reduce((a, b) => a + toMS(b), 0);
+
+            throw new Error('Value is not a valid string');
         };
-        if(typeof value === 'number') return toDuration(value, { compactDuration, fullDuration, avoidDuration });
-        throw new Error('Value is not a string or a number');
+        if(typeof value === 'number') return toDuration(value, { compactDuration: option?.compactDuration, avoidDuration: option?.avoidDuration });
+        throw new Error('Value is not a valid string nor number');
     } catch(err) {  
         const message = isError(err)
         ? `${err.message}. Value = ${JSON.stringify(value)}`

@@ -1,14 +1,14 @@
 import {
     DurationInterface,
-    CompactUnitAnyCase
+    CompactUnit
 } from '../../@types/lib/ms';
 
 /**
- * Convert milliseconds to durations
- * @param {number} value Number to turn into formatted time
+ * Convert milliseconds to formatted time
+ * @param {number} value Millisecond to convert
  * @returns {string}
  */
-export function toDuration(value: number, { compactDuration, fullDuration, avoidDuration }: { compactDuration?: boolean, fullDuration?: boolean, avoidDuration?: Array<CompactUnitAnyCase> } = {}): string {
+export function toDuration(value: number, { compactDuration, avoidDuration }: { compactDuration?: boolean, avoidDuration?: Array<CompactUnit> } = {}): string {
     const absMs = Math.abs(value);
     const duration: Array<DurationInterface> = [
         { short: 'w', long: 'week', duration: Math.floor(absMs / 6.048e+8) },
@@ -19,8 +19,8 @@ export function toDuration(value: number, { compactDuration, fullDuration, avoid
         { short: 'ms', long: 'millisecond', duration: absMs % 1000 }
     ];
     const mappedDuration = duration
-        .filter(obj => obj.duration !== 0 && avoidDuration ? fullDuration && !avoidDuration.map(v => v.toLowerCase()).includes(obj.short) : obj.duration)
+        .filter(obj => obj.duration !== 0 && avoidDuration ? !avoidDuration.includes(obj.short) : obj.duration)
         .map(obj => `${Math.sign(value) === -1 ? '-' : ''}${compactDuration ? `${Math.floor(obj.duration)}${obj.short}` : `${Math.floor(obj.duration)} ${obj.long}${obj.duration === 1 ? '' : 's'}`}`);
-    const result = fullDuration ? mappedDuration.join(compactDuration ? ' ' : ', ') : mappedDuration[0];
-    return result || `${absMs}`;
+    
+    return mappedDuration.join(compactDuration ? ' ' : ', ') || `${absMs}`;
 };

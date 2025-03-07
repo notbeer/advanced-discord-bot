@@ -7,6 +7,6 @@ import { Event } from "@types";
 export const event: Event = {
     name: 'interactionCreate',
     async execute(client, interaction: ChatInputCommandInteraction) {
-        command(client, interaction);
+        if(interaction.isCommand()) command(client, interaction);
     }
 };

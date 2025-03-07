@@ -1,10 +1,12 @@
-type CompactUnit = 'ms' | 's' | 'm' | 'h' | 'd' | 'w' | 'y';
+export type CompactUnit = 'ms' | 's' | 'm' | 'h' | 'd' | 'w' | 'y';
 type BaseFullUnit = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'year';
 
-export type CompactUnitAnyCase = CompactUnit | Uppercase<CompactUnit>;
-
+export interface Option {
+    compactDuration?: boolean,
+    avoidDuration?: Array<CompactUnit>
+}
 export interface DurationInterface {
-    short: CompactUnitAnyCase
+    short: CompactUnit
     long: BaseFullUnit
     duration: number
 }

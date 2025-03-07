@@ -18,13 +18,13 @@ export async function xp(msg: Message) {
 
     // Check if user is on cooldown
     const lastXPTime = userCooldowns.get(user.id);
-    if (lastXPTime && now - lastXPTime < COOLDOWN_TIME) return;
+    if(lastXPTime && now - lastXPTime < COOLDOWN_TIME) return;
 
     // Update the lastXPTime for this user
     userCooldowns.set(user.id, now);
 
     let guildRank = await userRankSchema.findOne({ guildId });
-    if (!guildRank) guildRank = new userRankSchema({ guildId, ranks: [] });
+    if(!guildRank) guildRank = new userRankSchema({ guildId, ranks: [] });
 
     // Find user inside the ranks array
     let userRank = guildRank.ranks.find(rank => rank.userId === user.id);

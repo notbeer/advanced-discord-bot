@@ -5,25 +5,31 @@ import {
     Collection
 } from "discord.js";
 
-import { crawlDir } from '../utils/crawler';
 import { log } from '../utils/log';
+import { crawlDir } from '../utils/crawler';
 
 import { Event, Command } from "@types";
 
 class ClientExtention extends Client {
     public cooldowns: Collection<string, Collection<string, number>> = new Collection();
     public commands: Collection<string, Command> = new Collection();
+    public language: Collection<string, string> = new Collection();
 
     public async init(token: string): Promise<void> {
+        log.info('[Bot] Connecting to all modules...')
         await this._deployEvents();
         await this._deployCommands();
         await this._connectToMongoose();
-        this.login(token);
+        await this.login(token);
     };
     private async _connectToMongoose(): Promise<void> {
-        await mongoose.connect(process.env.MONGO_URI!)
-            .then(() => log.info('Connected to MongoDB.'))
-            .catch(err => log.error(`MongoDB connection error: ${err}`));
+        try {
+            await mongoose.connect(process.env.MONGO_URI!);
+            log.success('[MongoDB] Connected to the database.');
+        } catch (err) {
+            log.error(`[MongoDB] Failed to connect to the database: ${err}`);
+            process.exit(1);
+        };
     };
     private async _deployEvents(): Promise<void> {
         for(const file of crawlDir(path.join(__dirname, "..", 'events'), 'ts')) {

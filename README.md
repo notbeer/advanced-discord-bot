@@ -26,15 +26,24 @@
 
 ## Key Features
 
+* Sharding
 * Handlers
   - A file reading event handling.
   - Reading files to load commands with features like cooldown, permissions and etc
 * Commands
   - Fun
-    - Games
+    - Board Games
       - /tictactoe
-        - Ability to play TicTacToe with a user
+        - Ability to play with a user
         - You can also play with the discord bot
+      - Connect4
+        - Ability to play with a user
+        - You can also play with the discord bot
+    - Puzzles
+      - /wordle
+        - Remake of the popular game wordle, with a beautifully intregated canvas.
+    - Text
+      - Convert a given text to emojis.
   - Misc
     - /info
       - Get information on the guild
@@ -45,6 +54,9 @@
   - Chat Ranking
     - /rank
       - Get a beautiful image that displays users xp, and guild ranking.
+  - Settings
+    - /language
+      - Change the discord bots language for the guild
 * Languages
   - Ability to intregate multiple languages in the bot eg. English, Spanish, etc...
 * Chat Rank system
@@ -67,6 +79,9 @@ $ npm install
 ```
 ### Adjusting .env file
 ```ini
+# Remove this variable if project is being deployed
+PROJECT=DEVELOPMENT
+
 # Your Discord bot Token
 BOT_TOKEN=...
 
@@ -90,8 +105,14 @@ $ npm run delete-commands
 ```
 ### Run the app
 ```bash
-# Run the app
+# Start the js dist version of the application
 $ npm run start
+
+# Build the js dist version of the application
+$ npm run build
+
+# Build the js dist version of the application and run it
+$ npm run prod
 
 # For development purpose
 $ npm run dev
@@ -107,7 +128,7 @@ $ npm run dev
 
 ## Credits
 
-This software uses the following open source packages:
+This software uses the following open source packages mainly:
 
 - [Node.js](https://nodejs.org/)
 - [Discord.js](https://discord.js.org)

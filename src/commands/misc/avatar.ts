@@ -19,7 +19,8 @@ export const command: Command = {
         ),
     execute(client, interaction) {
         const target = (interaction.options.getUser('target')) as User || interaction.user, avatar = target.avatarURL();
-        if(typeof avatar !== 'string') return interaction.reply({ ephemeral: true, content: i18n.__("command_avatar.defaultAvatar") });
+        if(typeof avatar !== 'string') return interaction.reply({ content: i18n.__("command_avatar.defaultAvatar"), flags: ['Ephemeral'] });
+
         const avatarEmbed = new EmbedBuilder()
             .setColor("#2F3136")
             .setTitle(i18n.__mf("command_avatar.targetAvatar", { tag: target.tag }))

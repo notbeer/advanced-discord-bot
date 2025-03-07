@@ -13,7 +13,7 @@ import i18n from "../../utils/i18n";
 import { Command } from "@types";
 
 export const command: Command = {
-    cooldown: '5s',
+    cooldown: '10s',
     data: new SlashCommandBuilder()
         .setName('rank')
         .setDescription('Get users rank card')
@@ -23,13 +23,13 @@ export const command: Command = {
         ),
     async execute(client, interaction) {
         const target = (interaction.options.getUser('target')) as User || interaction.user;
-        if(target.bot) interaction.reply({ content: i18n.__("rank.userIsBot"), ephemeral: true });
+        if(target.bot) return interaction.reply({ content: i18n.__("rank.userIsBot"), flags: ['Ephemeral'] });
 
         const guildRank = await userRankSchema.findOne({ guildId: interaction.guildId });
-        if(!guildRank) return interaction.reply({ content: i18n.__("rank.userNoMessage"), ephemeral: true });
+        if(!guildRank) return interaction.reply({ content: i18n.__("rank.userNoMessage"), flags: ['Ephemeral'] });
 
         const userRank = guildRank.ranks.find(v => v.userId === target.id);
-        if(!userRank) return interaction.reply({ content: i18n.__("rank.userNoMessage"), ephemeral: true });
+        if(!userRank) return interaction.reply({ content: i18n.__("rank.userNoMessage"), flags: ['Ephemeral'] });
 
         const canvas = Canvas.createCanvas(850, 350);
         const ctx = canvas.getContext("2d");
@@ -45,7 +45,7 @@ export const command: Command = {
         // ctx.fillStyle = gradient;
         // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const fontColor = 'red';
+        const fontColor = '#42f560';
 
         //! Profile border
         const centerX = 95;
@@ -73,7 +73,7 @@ export const command: Command = {
         const nextLevelXp = Math.floor(100 * Math.pow(1.1, userRank.level) * Math.log(userRank.level + 1));
         const progress = xp / nextLevelXp;
         let progressWidth = 600 * progress;
-        console.log(progressWidth)
+        
         //! Draw progress bar
         if(progressWidth !== 0) {
             if(progressWidth < 10) progressWidth = 12;
@@ -129,10 +129,8 @@ export const command: Command = {
 
         //! Rank number
         const sortedRanks = guildRank.ranks.sort((a, b) => {
-            if (b.level !== a.level) {
-                return b.level - a.level;  // Sort by level first (descending)
-            }
-            return b.xp - a.xp;  // If levels are equal, sort by xp (descending)
+            if(b.level !== a.level) return b.level - a.level; // Sort by level first (descending)
+            return b.xp - a.xp; // If levels are equal, sort by xp (descending)
         });
 
         // Find the user's rank position (index + 1 because rank is 1-based)

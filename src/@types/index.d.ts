@@ -24,7 +24,6 @@ export interface Event {
     name: keyof ClientEvents,
     once?: boolean,
     execute(client: Client, ...args: any[]): any;
-}
+};
 
-export { BotStatus } from './events/ready';
 export { CompactUnitAnyCase, DurationInterface } from './lib/ms';

@@ -8,17 +8,17 @@
 		"unexpectedError": "¡Hubo un error inesperado al intentar ejecutar este comando!"
 	},
 	"rank": {
-		"userIsBot": "Los bots no tienen tarjetas de clasificación.",
+		"userIsBot": "Los bots no tienen tarjetas de rango.",
 		"userNoMessage": "El usuario no ha enviado ningún mensaje en este servidor.",
 		"userLevelUp": "🎉 <@{user}> ha subido al **Nivel {level}**!"
 	},
-	"command_tictactoe": {
-		"opponentIsBot": "El oponente no puede ser un bot.",
-		"opponentIsSelf": "No puedes jugar contra ti mismo.",
-		"waitForTurn": "Por favor, espera tu turno.",
-		"chooseMove": "<@{user}>, elige una posición para colocar `{sign}`:",
-		"matchWon": "¡{user} ha ganado la partida!",
-		"matchTie": "¡La partida ha terminado en empate!"
+	"game": {
+		"opponentIsBot": "🤖 El oponente no puede ser un bot.",
+		"opponentIsSelf": "🙅‍♂️ ¡No puedes jugar contra ti mismo!",
+		"waitForTurn": "⏳ Por favor, espera tu turno...",
+		"chooseMove": "👉 <@{user}>, elige una posición para colocar `{sign}`:",
+		"matchWon": "🎉🎊 ¡{user} ha ganado la partida!",
+		"matchTie": "🤝 ¡La partida ha terminado en empate!"
 	},
 	"command_avatar": {
 		"defaultAvatar": "Este usuario tiene un avatar predeterminado.",

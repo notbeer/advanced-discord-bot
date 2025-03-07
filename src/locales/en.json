@@ -12,13 +12,13 @@
 		"userNoMessage": "User has not sent a message in this guild.",
 		"userLevelUp": "🎉 <@{user}> leveled up to **Level {level}**!"
 	},
-	"command_tictactoe": {
-		"opponentIsBot": "Opponent cannot be a bot.",
-		"opponentIsSelf": "You cannot play against yourself.",
-		"waitForTurn": "Please wait for your turn",
-		"chooseMove": "<@{user}>, choose a position to place `{sign}`:",
-		"matchWon": "{user} has won the game!",
-		"matchTie": "The match has ended in a tie!"
+	"game": {
+		"opponentIsBot": "🤖 Opponent cannot be a bot.",
+		"opponentIsSelf": "🙅‍♂️ You cannot play against yourself!",
+		"waitForTurn": "⏳ Please wait for your turn...",
+		"chooseMove": "👉 <@{user}>, choose a position to place `{sign}`:",
+		"matchWon": "🎉🎊 {user} has won the match!",
+		"matchTie": "🤝 The match has ended in a tie!"
 	},
 	"command_avatar": {
 		"defaultAvatar": "This user has a default avatar.",
