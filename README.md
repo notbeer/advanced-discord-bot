@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/showcase.gif" alt="Gitter">
+  <img src="assets/showcase.gif" alt="showcase">
 </p>
 
 ## Key Features
@@ -37,25 +37,30 @@
         - Ability to play with a user
         - You can also play with the discord bot
       <p align="left">
-        <img src="assets/tictactoe.png" alt="Gitter">
+        <img src="assets/tictactoe.png" alt="tictactoe">
       </p>
-
       - Connect4
         - Ability to play with a user
         - You can also play with the discord bot
       <p align="left">
-        <img src="assets/connect4.png" alt="Gitter">
+        <img src="assets/connect4.png" alt="connect4">
       </p>
-
     - Puzzles
       - /wordle
         - Remake of the popular game wordle, with a beautifully intregated canvas.
       <p align="left">
-        <img src="assets/wordle.png" alt="Gitter">
+        <img src="assets/wordle.png" alt="worldle">
       </p>
-
+      - /hangman
+        - Guess the word to win. Try not to guess wrong 6 times or you loose!
+      <p align="left">
+        <img src="assets/hangman.png" alt="hangman">
+      </p>
     - Text
-      - Convert a given text to emojis.
+      - /emojify
+        - Convert a given text to emojis
+      - /fliptable
+        - Flip the table!
   - Misc
     - /info
       - Get information on the guild
@@ -67,7 +72,7 @@
     - /rank
       - Get a beautiful image that displays users xp, and guild ranking.
     <p align="left">
-      <img src="assets/rank-card.png" alt="Gitter">
+      <img src="assets/rank-card.png" alt="rank card">
     </p>
   - Settings
     - /language

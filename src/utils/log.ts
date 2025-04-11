@@ -23,5 +23,8 @@ export const log = {
     info: (msg: any) => logMessage("info", msg),
     success: (msg: any) => logMessage("success", msg),
     warn: (msg: any) => logMessage("warn", msg),
-    error: (msg: any) => logMessage("error", msg)
+    error: (msg: any, throwErr = true) => {
+        logMessage("error", msg);
+        if(throwErr) throw new Error(msg);
+    }
 };

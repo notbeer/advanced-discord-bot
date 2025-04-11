@@ -1,6 +1,6 @@
 {
   "name": "advanced-discord-bot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An advanced discord bot with a few stuff here and there",
   "main": "dist/src/index.js",
   "keywords": [
@@ -19,13 +19,14 @@
     "start": "node .",
     "build": "tsc --build",
     "prod": "tsc --build && node ./dist/src/index.js",
-    "dev": "ts-node-dev --respawn --transpile-only --poll ./src/bot.ts",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/bot.ts",
     "deploy-commands": "ts-node ./scripts/deploy-commands.ts",
     "delete-commands": "ts-node ./scripts/delete-commands.ts"
   },
   "author": "notbeer",
   "license": "GNU",
   "dependencies": {
+    "advanced-ms": "^1.0.4",
     "canvas": "^3.1.0",
     "chalk": "^4.1.2",
     "discord.js": "^14.18.0",

@@ -1,7 +1,7 @@
 import {
     ChannelType,
-    CommandInteraction,
     EmbedBuilder,
+    Guild,
     PresenceUpdateStatus
 } from "discord.js";
 import moment from "moment";
@@ -21,9 +21,7 @@ const filterLevels = {
     2: 'Everyone'
 };
 
-export async function Guild(interaction: CommandInteraction) {
-    const guild = interaction.guild!;
-
+export async function GuildEmbed(guild: Guild) {
     const users = guild.members.cache.filter(m => !m.user.bot).size,
           bots = guild.members.cache.filter(m => m.user.bot).size;
 
@@ -31,18 +29,24 @@ export async function Guild(interaction: CommandInteraction) {
           online = guild.members.cache.filter(m => m.presence?.status === PresenceUpdateStatus.Online).size,
           idle = guild.members.cache.filter(m => m.presence?.status === PresenceUpdateStatus.Idle).size,
           dnd = guild.members.cache.filter(m => m.presence?.status === PresenceUpdateStatus.DoNotDisturb).size;
+          
+    const roles = guild.roles.cache
+          .sort((a, b) => b.position - a.position)
+          .map(role => role.toString())
+          .slice(0, -1);
+  
+      const emojis = guild.emojis.cache;
 
     const category = guild.channels.cache.filter(c => c.type === ChannelType.GuildCategory).size,
           text = guild.channels.cache.filter(c => c.type === ChannelType.GuildText).size,
-          vc = guild.channels.cache.filter(c => c.type === ChannelType.GuildVoice).size;
-
-
-    const roles = guild.roles.cache
-        .sort((a, b) => b.position - a.position)
-        .map(role => role.toString())
-        .slice(0, -1);
-
-    const emojis = guild.emojis.cache;
+          vc = guild.channels.cache.filter(c => c.type === ChannelType.GuildVoice).size,
+          announcement = guild.channels.cache.filter(c => c.type === ChannelType.GuildAnnouncement).size,
+          announcementThread = guild.channels.cache.filter(c => c.type === ChannelType.AnnouncementThread).size,
+          publicThread = guild.channels.cache.filter(c => c.type === ChannelType.PublicThread).size,
+          privateThread = guild.channels.cache.filter(c => c.type === ChannelType.PrivateThread).size,
+          guildStageVoice = guild.channels.cache.filter(c => c.type === ChannelType.GuildStageVoice).size,
+          guildForum = guild.channels.cache.filter(c => c.type === ChannelType.GuildForum).size,
+          guildMedia = guild.channels.cache.filter(c => c.type === ChannelType.GuildMedia).size;
 
     const guildIcon = guild.iconURL({ forceStatic: false })!;
     const embed = new EmbedBuilder()
@@ -70,6 +74,13 @@ export async function Guild(interaction: CommandInteraction) {
             { name: '**Channel Category: **', value: `${category}`, inline: true },
             { name: '**Text channels: **', value: `${text}`, inline: true },
             { name: '**Voice channels: **', value: `${vc}`, inline: true },
+            { name: '**Announcement channels: **', value: `${announcement}`, inline: true },
+            { name: '**Announcement Threads: **', value: `${announcementThread}`, inline: true },
+            { name: '**Public Thread: **', value: `${publicThread}`, inline: true },
+            //{ name: '**Private Thread: **', value: `${privateThread}`, inline: true },
+            { name: '**Guild Stage Voice channels: **', value: `${guildStageVoice}`, inline: true },
+            { name: '**Guild Forum: **', value: `${guildForum}`, inline: true },
+            { name: '**Guild Media: **', value: `${guildMedia}`, inline: true },
 
             { name: '**Regular emojis: **', value: `${emojis.filter(emoji => !emoji.animated).size}`, inline: true },
             { name: '**Animated emojis: **', value: `${emojis.filter(emoji => emoji.animated).size}`, inline: true },
@@ -77,5 +88,6 @@ export async function Guild(interaction: CommandInteraction) {
             { name: `**Roles: ** [${roles.length}]`, value: roles.length < 15 ? roles.join(', ') : roles.length > 15 ? trimArray(roles).join(', ') : 'None', inline: true },
         )
         .setTimestamp();
-    interaction.reply({ embeds: [embed] })
+    
+    return embed;
 };

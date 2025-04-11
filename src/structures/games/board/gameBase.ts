@@ -7,19 +7,24 @@ export const enum Player {
 export abstract class GameBase {
     /**
      * @protected
+     * Game name
+     */
+    protected abstract _name: string;
+    /**
+     * @protected
      * Board data
      */
-    protected _board: Array<any>;
+    protected abstract _board: Array<Player> | Player[][];
     /**
      * @protected
      * Player ones sign
      */
-    protected p1sign: string;
+    protected abstract p1sign: string;
     /**
      * @protected
      * Player twos sign
      */
-    protected p2sign: string;
+    protected abstract p2sign: string;
 
     /**
      * @protected
@@ -32,6 +37,14 @@ export abstract class GameBase {
      */
     protected _winner = Player.None;
 
+    /**
+     * @public
+     * Get game name
+     * @return {string}
+     */
+    public get name(): string {
+        return this._name;
+    };
     /**
      * @public
      * Get board data

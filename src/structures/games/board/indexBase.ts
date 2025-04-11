@@ -9,6 +9,7 @@ import {
 import i18n from "../../../utils/i18n";
 
 import { GameBase, Player } from "../board/gameBase";
+import inviteUser from "../inviteUser";
 
 export abstract class MainBase<T extends GameBase> {
     protected _game: T;
@@ -28,12 +29,14 @@ export abstract class MainBase<T extends GameBase> {
     protected _currentPlayer() {
         return this._game.currentPlayer === Player.First ? this._p1 : this._p2;
     };
+
     protected _extraMessageStatus(): string {
         return "";
     };
+    
     protected _messageStatus() {
         const p = this._currentPlayer();
-        let msg = `\`${this._p1.username}\` VS \`${this._p2.username}\`\n\n`;
+        let msg = `\`${this._p1.username}\` **VS** \`${this._p2.username}\`\n\n`;
     
         msg += this._game.winner !== Player.None
         ? i18n.__mf("game.matchWon", { user: p.username })
@@ -45,33 +48,42 @@ export abstract class MainBase<T extends GameBase> {
     };
 
     protected async _aiMove(i: any) {
-        if(typeof this._aiInstance === 'undefined' || this._game.currentPlayer !== Player.Second) return;
+        if(!this._aiInstance || this._game.currentPlayer !== Player.Second) return;
 
         this._game.updateBoard(this._aiInstance.getMove(this._game.board));
 
         await i.editReply({ content: this._messageStatus(), components: this._renderButtons() });
     };
     protected async _userMove(i: any): Promise<void> {
-        if (i.user.id !== this._currentPlayer().id) return i.followUp({ content: i18n.__("game.waitForTurn"), flags: ['Ephemeral'] });
+        if(i.user.id !== this._currentPlayer().id) return i.followUp({ content: i18n.__("game.waitForTurn"), flags: ['Ephemeral'] });
 
         this._game.updateBoard(Number(i.customId));
+
         await i.editReply({ content: this._messageStatus(), components: this._renderButtons() });
     };
 
     public async start(interaction: CommandInteraction) {
-        const res = await interaction.reply({ content: this._messageStatus(), components: this._renderButtons() }) as InteractionResponse;
+        let res: InteractionResponse<boolean> | false;
+        if(this._aiInstance) res = await interaction.reply({ content: this._messageStatus(), components: this._renderButtons() });
+        else {
+            res = await inviteUser(this._game.name, interaction, this._p2);
 
-        this._aiMove(interaction);
+            if(!res) return;
+
+            interaction.editReply({ content: this._messageStatus(), embeds: [], components: this._renderButtons() });
+        };
+
+        await this._aiMove(interaction);
 
         const collector = res.createMessageComponentCollector({
             filter: async (i) => {
-                await i.deferUpdate();
+                await i.deferUpdate().catch();
                 return [this._p1.id, this._p2.id].includes(i.user.id);
             }}
         );
         collector.on('collect', async (i) => {
             await this._userMove(i);
-            this._aiMove(i);
+            await this._aiMove(i);
         });
     };
 };

@@ -11,26 +11,27 @@ import i18n from "../../../../utils/i18n";
 import { Command } from "@types";
 
 export const command: Command = {
+    cooldown: '1.5 minute',
     guildOnly: true,
     data: new SlashCommandBuilder()
         .setName('connect4')
         .setDescription('Play a classic game of Connect4')
         .addSubcommand(subcommand => subcommand
             .setName('user')
-            .setDescription('Play against an user')
+            .setDescription('Play against an human')
             .addUserOption(option => option
                 .setRequired(true)
                 .setName('opponent')
-                .setDescription('Your opponent')
+                .setDescription('Your human opponent')
             )
         )
         .addSubcommand(subcommand => subcommand
             .setName('bot')
-            .setDescription('Play against an AI')
+            .setDescription('Play against the bot')
             .addStringOption(option => option
                 .setRequired(true)
                 .setName('difficulty')
-                .setDescription('Match difficulty level')
+                .setDescription('Match difficulty level against against the bot')
                 .addChoices(
                     { name: 'Easy', value: 'e' },
                     { name: 'Medium', value: 'm' },

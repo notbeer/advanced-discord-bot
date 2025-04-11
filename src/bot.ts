@@ -21,3 +21,5 @@ const client = new Client({
 });
 
 client.init(process.env.BOT_TOKEN!);
+
+//process.on('unhandledRejection')

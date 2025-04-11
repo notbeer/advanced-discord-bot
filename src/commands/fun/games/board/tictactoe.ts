@@ -11,6 +11,7 @@ import i18n from "../../../../utils/i18n";
 import { Command } from "@types";
 
 export const command: Command = {
+    cooldown: '30 seconds',
     guildOnly: true,
     data: new SlashCommandBuilder()
         .setName('tictactoe')

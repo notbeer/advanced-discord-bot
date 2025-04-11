@@ -23,7 +23,7 @@ i18n.configure({
         log.warn(msg)
     },
     logErrorFn: function (msg) {
-        log.error(`[Error]: ${msg}`);
+        log.error(msg);
     },
     missingKeyFn: function (_locale, value) {
         return value;

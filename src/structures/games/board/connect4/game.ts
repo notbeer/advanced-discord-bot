@@ -3,10 +3,8 @@ import { GameBase, Player } from "../gameBase";
 type LastMove = { col: number, row: number };
 
 export class Connect4Game extends GameBase {
-    protected _board: Array<Array<Player>>;
     constructor() {
         super();
-        this._board = Array.from({ length: Connect4Game.ROWS }, () => Array(Connect4Game.COLS).fill(Player.None));
     };
     
     /**
@@ -16,7 +14,17 @@ export class Connect4Game extends GameBase {
     public static readonly COLS = 7;
     public static readonly ROWS = 6;
     public static readonly MAX_SPACE = 3;
-    
+
+    /**
+     * @protected
+     * Game name
+     */
+    protected _name = 'Connect4';
+    /**
+     * @protected
+     * Board data
+     */
+    protected _board: Array<Array<Player>> = Array.from({ length: Connect4Game.ROWS }, () => Array(Connect4Game.COLS).fill(Player.None));
     /**
      * @protected
      * Last column placed
@@ -24,7 +32,7 @@ export class Connect4Game extends GameBase {
     protected _lastMove: null | LastMove = null;
     /**
      * @static
-     * Winner of the round
+     * The winning positions
      */
     protected _winningPos: Array<LastMove> = [];
     /**
@@ -52,7 +60,7 @@ export class Connect4Game extends GameBase {
 
     /**
      * @public
-     * Get the winner of the round
+     * Get the winning positions
      * @return {Player}
      */
     public get winningPos(): Array<LastMove> {

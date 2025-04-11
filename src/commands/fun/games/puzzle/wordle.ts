@@ -65,11 +65,12 @@ function drawBoard(wordOfTheDay: string, guesses: Array<string>) {
 };
 
 export const command: Command = {
+    cooldown: '2 minute',
     guildOnly: true,
     data: new SlashCommandBuilder()
         .setName('wordle')
         .setDescription('Find the word of the day'),
-    async execute(client, interaction) {
+    async execute(_, interaction) {
         const wordOfTheDay = Words[Math.floor((Date.now() - new Date(2022, 0, 1).getTime()) / 1000 / 60 / 60 / 24)].toUpperCase();
         const guesses: Array<string> = [];
         

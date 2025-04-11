@@ -7,6 +7,6 @@ import { Event } from "@types";
 export const event: Event = {
     name: 'messageCreate',
     async execute(client, message: Message) {
-        xp(message);
+        xp(client, message);
     }
 };

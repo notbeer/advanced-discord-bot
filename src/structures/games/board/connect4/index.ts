@@ -18,7 +18,7 @@ export default class Connect4 extends MainBase<Connect4Game>{
     protected _renderButtons() {
         const buttons = Array.from({ length: 7 }, (_, i) =>
             new ButtonBuilder()
-                .setDisabled(this._game.winner !== Player.None)
+                .setDisabled(!this._game.isBoardFull && this._game.winner !== Player.None)
                 .setCustomId(`${i}`)
                 .setLabel(`${i + 1}`)
                 .setStyle(ButtonStyle.Secondary)
@@ -28,7 +28,7 @@ export default class Connect4 extends MainBase<Connect4Game>{
             new ActionRowBuilder<ButtonBuilder>().setComponents(...buttons.slice(0, 4)),
             new ActionRowBuilder<ButtonBuilder>().setComponents(...buttons.slice(-3))
         ];
-    };    
+    };
 
     protected _extraMessageStatus() {
         let board = "\n|1️⃣|2️⃣|3️⃣|4️⃣|5️⃣|6️⃣|7️⃣|\n\n"

@@ -1,5 +1,11 @@
 import { Message, TextChannel } from 'discord.js';
+
+import ClientExtention from '../client';
+
 import userRankSchema from '../model/userRank';
+
+import { language } from './language';
+
 import i18n from "../utils/i18n";
 
 // Cache to track cooldowns for each user (userId -> lastXPTime)
@@ -8,7 +14,7 @@ const userCooldowns = new Map();
 // Set cooldown time in milliseconds (e.g., 30 seconds = 30000ms)
 const COOLDOWN_TIME = 30000;
 
-export async function xp(msg: Message) {
+export async function xp(client: ClientExtention, msg: Message) {
     const user = msg.author;
     const guildId = msg.guildId;
 
@@ -42,7 +48,10 @@ export async function xp(msg: Message) {
         userRank.xp = 0;
 
         const channel = msg.channel;
-        if(channel instanceof TextChannel) channel.send(i18n.__mf("rank.userLevelUp", { user: user.id, level: userRank.level }));
+        if(channel instanceof TextChannel) {
+            await language(client, msg.guild);
+            channel.send(i18n.__mf("rank.userLevelUp", { user: user.id, level: userRank.level }));
+        };
     };
 
     await guildRank.save();

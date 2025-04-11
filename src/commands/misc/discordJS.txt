@@ -1,0 +1,31 @@
+import { SlashCommandBuilder } from "discord.js";
+
+import { Command } from "@types";
+import { log } from "../../utils/log";
+
+export const command: Command = {
+    cooldown: '5 second',
+    data: new SlashCommandBuilder()
+        .setName('discordjs')
+        .setDescription('Fetch Discord.JS docs')
+        .addStringOption(option => option
+            .setRequired(true)
+            .setName('query')
+            .setDescription('Docs to fetch')
+        ),
+    async execute(client, interaction) {
+        await interaction.deferReply();
+
+        const query = interaction.options.get('text')?.value as string;
+
+        fetch(`https://djsdocs.sorta.moe/v2/embed?src=master&q=${encodeURIComponent(query)}`).then(res => res.json())
+            .then(json => {
+                if(!json) return interaction.editReply("Couldn't find the query...");
+                interaction.reply({ embeds: [json] });
+            }).catch((err) => {
+                log.error(err);
+                interaction.editReply("There was an error fetching the docs.");
+            }
+        )
+    }
+};

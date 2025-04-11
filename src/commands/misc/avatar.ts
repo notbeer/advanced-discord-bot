@@ -17,8 +17,8 @@ export const command: Command = {
             .setName('target')
             .setDescription('Get targets avatar')
         ),
-    execute(client, interaction) {
-        const target = (interaction.options.getUser('target')) as User || interaction.user, avatar = target.avatarURL();
+    execute(_, interaction) {
+        const target = interaction.options.getUser('target') as User || interaction.user, avatar = target.avatarURL();
         if(typeof avatar !== 'string') return interaction.reply({ content: i18n.__("command_avatar.defaultAvatar"), flags: ['Ephemeral'] });
 
         const avatarEmbed = new EmbedBuilder()

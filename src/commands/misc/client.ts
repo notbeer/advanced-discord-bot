@@ -5,7 +5,7 @@ import {
 } from "discord.js";
 import { utc } from "moment";
 
-import MS from "../../lib/ms";
+import AdvancedMS from "advanced-ms";
 
 import packageInfo from '../../../package.json';
 
@@ -30,7 +30,7 @@ export const command: Command = {
             .setAuthor({ name: cli.username, iconURL: cli.displayAvatarURL({ forceStatic: false }) })
             .setThumbnail(cli.displayAvatarURL({ forceStatic: false }))
             .addFields(
-                { name: '**Uptime: **', value: MS(uptime, { fullDuration: true, avoidDuration: ['ms'] }), inline: true },
+                { name: '**Uptime: **', value: AdvancedMS(uptime, { compactDuration: true, avoidUnits: ['ms'] }), inline: true },
                 { name: '**Client: **', value: cli.tag, inline: true },
                 { name: '**Client ID: **', value: cli.id, inline: true },
                 { name: '**Creation Date: **', value: utc(cli.createdTimestamp).format('LLLL'), inline: true },

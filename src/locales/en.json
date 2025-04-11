@@ -13,12 +13,23 @@
 		"userLevelUp": "🎉 <@{user}> leveled up to **Level {level}**!"
 	},
 	"game": {
+		"invitation": {
+			"requestTitle": "⌛ Game invitation",
+			"requestDescription": "<@{user}> has invited you to play a game of **{game}**.",
+
+			"rejectTitle": "❌ Invitation Rejected",
+			"rejectDescription": "<@{user}> has rejected **{game}** invitation.",
+
+			"timeoutTitle": "⌛ Invitation Timeout",
+			"timeoutDescription": "<@{user}> didn't respond to **{game}** invitation in time."
+		},
 		"opponentIsBot": "🤖 Opponent cannot be a bot.",
 		"opponentIsSelf": "🙅‍♂️ You cannot play against yourself!",
 		"waitForTurn": "⏳ Please wait for your turn...",
 		"chooseMove": "👉 <@{user}>, choose a position to place `{sign}`:",
 		"matchWon": "🎉🎊 {user} has won the match!",
-		"matchTie": "🤝 The match has ended in a tie!"
+		"matchTie": "🤝 The match has ended in a tie!",
+		"matchLost": "❌ {user} has lost the game..."
 	},
 	"command_avatar": {
 		"defaultAvatar": "This user has a default avatar.",

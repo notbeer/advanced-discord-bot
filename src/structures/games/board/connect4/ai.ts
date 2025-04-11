@@ -3,9 +3,8 @@ import { Player, Connect4Game } from './game';
 export const enum Difficulty {
     Easy = 2,
     Medium = 4,
-    Hard = 7
+    Hard = 8
 };
-
 
 const connect4 = new Connect4Game();
 

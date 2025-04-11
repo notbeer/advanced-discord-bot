@@ -3,8 +3,18 @@ import { GameBase, Player } from "../gameBase";
 export default class TicTacToeGame extends GameBase {
     constructor() {
         super();
-        this._board = new Array(9).fill(Player.None);
     };
+
+    /**
+     * @protected
+     * Game name
+     */
+    protected _name = 'TicTacToe';
+    /**
+     * @protected
+     * Board data
+     */
+    protected _board: Array<Player> = new Array(9).fill(Player.None);
     /**
      * @protected
      * Player one's sign

@@ -21,7 +21,7 @@ export const command: Command = {
             .setName('target')
             .setDescription('Get targets rank card')
         ),
-    async execute(client, interaction) {
+    async execute(_, interaction) {
         const target = (interaction.options.getUser('target')) as User || interaction.user;
         if(target.bot) return interaction.reply({ content: i18n.__("rank.userIsBot"), flags: ['Ephemeral'] });
 
@@ -45,7 +45,7 @@ export const command: Command = {
         // ctx.fillStyle = gradient;
         // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const fontColor = '#42f560';
+        const accent = '#42f560';
 
         //! Profile border
         const centerX = 95;
@@ -54,7 +54,7 @@ export const command: Command = {
 
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-        ctx.strokeStyle = fontColor;
+        ctx.strokeStyle = accent;
         ctx.lineWidth = 5;
         ctx.stroke();
 
@@ -116,7 +116,7 @@ export const command: Command = {
 
         //! Level number
         ctx.font = `bold 35px ${fontStyle}`;
-        ctx.fillStyle = fontColor;
+        ctx.fillStyle = accent;
         ctx.textAlign = "right";
         shadowColor(ctx);
         const levelNumber = `${userRank.level}`;
@@ -136,7 +136,7 @@ export const command: Command = {
         // Find the user's rank position (index + 1 because rank is 1-based)
         const userRankIndex = sortedRanks.findIndex(v => v.userId === target.id);
         ctx.font = `bold 35px ${fontStyle}`;
-        ctx.fillStyle = fontColor;
+        ctx.fillStyle = accent;
         ctx.textAlign = "right";
         shadowColor(ctx);
         const rankNumber = `#${userRankIndex + 1}`;
@@ -158,7 +158,7 @@ export const command: Command = {
         ctx.drawImage(avatar, 35, 25, 120, 120); //25, 25, 150, 150
 
         const rankcardEmbed = new EmbedBuilder()
-            .setColor("#2F3136")
+            .setColor(accent)
             .setImage("attachment://rankcard.png")
             .setTimestamp();
         interaction.reply({ embeds: [rankcardEmbed], files: [new AttachmentBuilder(canvas.toBuffer(), { name: "rankcard.png", description: 'Example rank card' })] });

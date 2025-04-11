@@ -1,21 +1,31 @@
 {
 	"command_handler": {
 		"disableCommand": "Este comando ha sido deshabilitado temporalmente.",
-		"guildOnly": "¡Este comando no se puede usar fuera de los servidores!",
-		"dmOnly": "¡Este comando no se puede usar fuera de los mensajes directos!",
+		"guildOnly": "¡El comando no puede usarse fuera de los servidores!",
+		"dmOnly": "¡El comando no puede usarse fuera de los DMs!",
 		"needPermissions": "Necesito el permiso `{permission}` para este comando.",
-		"cooldown": "Por favor, espera `{timeLeft}` antes de volver a usar el comando `{commandName}`.",
-		"unexpectedError": "¡Hubo un error inesperado al intentar ejecutar este comando!"
+		"cooldown": "Por favor espera `{timeLeft}` antes de volver a usar el comando `{commandName}`.",
+		"unexpectedError": "¡Hubo un error inesperado al intentar ejecutar ese comando!"
 	},
 	"rank": {
 		"userIsBot": "Los bots no tienen tarjetas de rango.",
-		"userNoMessage": "El usuario no ha enviado ningún mensaje en este servidor.",
+		"userNoMessage": "El usuario no ha enviado mensajes en este servidor.",
 		"userLevelUp": "🎉 <@{user}> ha subido al **Nivel {level}**!"
 	},
 	"game": {
+		"invitation": {
+			"requestTitle": "⌛ Invitación a jugar",
+			"requestDescription": "<@{user}> te ha invitado a jugar una partida de **{game}**.",
+
+			"rejectTitle": "❌ Invitación Rechazada",
+			"rejectDescription": "<@{user}> ha rechazado la invitación para jugar **{game}**.",
+
+			"timeoutTitle": "⌛ Invitación Expirada",
+			"timeoutDescription": "<@{user}> no respondió a la invitación para jugar **{game}** a tiempo."
+		},
 		"opponentIsBot": "🤖 El oponente no puede ser un bot.",
 		"opponentIsSelf": "🙅‍♂️ ¡No puedes jugar contra ti mismo!",
-		"waitForTurn": "⏳ Por favor, espera tu turno...",
+		"waitForTurn": "⏳ Por favor espera tu turno...",
 		"chooseMove": "👉 <@{user}>, elige una posición para colocar `{sign}`:",
 		"matchWon": "🎉🎊 ¡{user} ha ganado la partida!",
 		"matchTie": "🤝 ¡La partida ha terminado en empate!"

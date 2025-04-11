@@ -20,7 +20,7 @@ export const command: Command = {
             .setName('text')
             .setDescription('Text to emojify')
         ),
-    async execute(client, interaction) {
+    async execute(_, interaction) {
         const text = interaction.options.get('text')?.value as string;
         
         interaction.reply({ content: text?.split('').map(v => mapping[v] || v).join('') });

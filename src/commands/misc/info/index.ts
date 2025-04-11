@@ -2,9 +2,10 @@ import {
     SlashCommandBuilder
 } from "discord.js";
 
-import { Guild } from "./guild";
+import { GuildEmbed } from "./guildEmbed";
 
 import { Command } from "@types";
+import { UserEmbed } from "./userEmbed";
 
 export const command: Command = {
     cooldown: '1 minute',
@@ -24,14 +25,20 @@ export const command: Command = {
                 .setDescription('User to fetch information on')
             )
         ),
-    async execute(client, interaction) {
+    async execute(_, interaction) {
         const subcommand = interaction.options.data[0];
-        switch (subcommand.name as unknown as string) {
+        switch (subcommand.name) {
             case 'guild':
-                await Guild(interaction);
+                const guildEmbed = await GuildEmbed(interaction.guild!);
+                await interaction.reply({ embeds: [guildEmbed] });
             break;
             case 'user':
-                await interaction.reply({ content: 'Not implemented yet.', ephemeral: true });
+                const guildMember = await interaction.guild?.members.fetch(interaction.options.data[0].user || interaction.user);
+
+                if(!guildMember) return;
+
+                const userEmbed = await UserEmbed(guildMember);
+                await interaction.reply({ embeds: [userEmbed] });
             break;
         };
     }

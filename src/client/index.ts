@@ -16,10 +16,11 @@ class ClientExtention extends Client {
     public language: Collection<string, string> = new Collection();
 
     public async init(token: string): Promise<void> {
-        log.info('[Bot] Connecting to all modules...')
+        console.clear();
+        log.info('[Bot] Connecting to all modules...');
+        await this._connectToMongoose();
         await this._deployEvents();
         await this._deployCommands();
-        await this._connectToMongoose();
         await this.login(token);
     };
     private async _connectToMongoose(): Promise<void> {
